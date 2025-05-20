@@ -6,19 +6,19 @@ function calculator() {
  
  
   if (operator == "+") {
-    alert(valueOne + valueTwo);
+    alert("Reuslt : "+ (valueOne + valueTwo));
   } 
   
   else if (operator == "-") {
-    alert(valueOne - valueTwo);
+    alert("Reuslt : "+ (valueOne - valueTwo));
   }
   
   else if (operator == "*") {
-    alert(valueOne * valueTwo);
+    alert("Reuslt : "+ (valueOne * valueTwo));
   }
   
   else if (operator == "/") {
-    alert(valueOne / valueTwo);
+    alert("Reuslt : "+ (valueOne / valueTwo));
   } 
   
   else {
