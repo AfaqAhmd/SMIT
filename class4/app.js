@@ -82,20 +82,20 @@ else{
 
             // need to check uservalue what is the reminder by divided by 2
 var uInput7 = +prompt("Enter a number to divide by 2. we will tell you the remainder");
-var remainder = uInput7 % 2;
-    alert("the remainder is: " + remainder);
+var remainder1 = uInput7 % 2;
+    alert("the remainder is: " + remainder1);
 
 
 
 
 // need to check uservalue what is the reminder by divided by 3
-var uInput7 = +prompt("Enter a number to divide by 3. we will tell you the remainder");
-var remainder = uInput7 % 3;
-    alert("the remainder is: " + remainder);
+var uInput8 = +prompt("Enter a number to divide by 3. we will tell you the remainder");
+var remainder2 = uInput8 % 3;
+    alert("the remainder is: " + remainder2);
 
 
 
 // need to check uservalue what is the reminder by divided by 4
-var uInput7 = +prompt("Enter a number to divide by 5. we will tell you the remainder");
-var remainder = uInput7 % 5;
-    alert("the remainder is: " + remainder);
+var uInput9 = +prompt("Enter a number to divide by 5. we will tell you the remainder");
+var remainder3 = uInput9 % 5;
+    alert("the remainder is: " + remainder3);
