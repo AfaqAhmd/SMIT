@@ -43,10 +43,10 @@ var uInput4 = +prompt("Enter a number to check whether its divisible by 2");
 var ischeck = uInput4 % 2 ;
 if(ischeck == 0)
 {
-    alert("is divisible");
+    alert(uInput4 +" is divisible by 2");
 }
 else{
-    alert("not divisible");
+    alert(uInput4 +" is not divisible by 2");
 }
 
 
@@ -57,10 +57,10 @@ var uInput5 = +prompt("Enter a number to check whether its divisible by 3");
 var ischeck = uInput5 % 3 ;
 if(ischeck == 0)
 {
-    alert("is divisible");
+    alert(uInput5 +" is divisible by 3");
 }
 else{
-    alert("not divisible");
+    alert(uInput5 +" is not divisible by 3");
 }
 
 
@@ -68,10 +68,10 @@ var uInput6 = +prompt("Enter a number to check whether its divisible by 5");
 var ischeck = uInput6 % 5 ;
 if(ischeck == 0)
 {
-    alert("is divisible");
+    alert(uInput6 +" is divisible by 5");
 }
 else{
-    alert("not divisible");
+    alert( uInput6 +" is not divisible 5");
 }
 
 
@@ -81,7 +81,7 @@ else{
 
 
             // need to check uservalue what is the reminder by divided by 2
-var uInput7 = +prompt("Enter a number to divide 2. we will tell you the remainder");
+var uInput7 = +prompt("Enter a number to divide by 2. we will tell you the remainder");
 var remainder = uInput7 % 2;
     alert("the remainder is: " + remainder);
 
@@ -89,13 +89,13 @@ var remainder = uInput7 % 2;
 
 
 // need to check uservalue what is the reminder by divided by 3
-var uInput7 = +prompt("Enter a number to divide 3. we will tell you the remainder");
+var uInput7 = +prompt("Enter a number to divide by 3. we will tell you the remainder");
 var remainder = uInput7 % 3;
     alert("the remainder is: " + remainder);
 
 
 
 // need to check uservalue what is the reminder by divided by 4
-var uInput7 = +prompt("Enter a number to divide 5. we will tell you the remainder");
+var uInput7 = +prompt("Enter a number to divide by 5. we will tell you the remainder");
 var remainder = uInput7 % 5;
     alert("the remainder is: " + remainder);
