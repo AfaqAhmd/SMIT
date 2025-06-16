@@ -70,6 +70,12 @@
 
 
 
+
+
+
+// -----------------------------------------------------------------
+
+
 let emails = [];
 let passwords = [];
 
@@ -80,17 +86,6 @@ for (let i = 0; i < 5; i++) {
     {
 
         let userInput = prompt(`Enter email ${i + 1}:`);
-        // for(k=0; k < userInput.length; k++)
-        // {
-        //     if(userInput[k] === "@"){
-            //     emails.push(userInput);
-            //     alert("is email");
-            //     }
-            //     else{
-                //         alert("not email");
-                //     }
-                
-                // }
                 
                 if(userInput.includes("@")){
                     emails.push(userInput);
