@@ -73,19 +73,33 @@
 let emails = [];
 let passwords = [];
 
+
 for (let i = 0; i < 5; i++) {
-    let userInput = prompt(`Enter email ${i + 1}:`);
-    for(k=0; k < userInput.length; k++)
+
+    while(true)
     {
-        if(userInput[k] === "@"){
-        emails.push(userInput);
-        alert("is email");
-        }
-        else{
-            alert("not email");
-        }
-      
-    }
+
+        let userInput = prompt(`Enter email ${i + 1}:`);
+        // for(k=0; k < userInput.length; k++)
+        // {
+        //     if(userInput[k] === "@"){
+            //     emails.push(userInput);
+            //     alert("is email");
+            //     }
+            //     else{
+                //         alert("not email");
+                //     }
+                
+                // }
+                
+                if(userInput.includes("@")){
+                    emails.push(userInput);
+                    break;
+                }
+                else{
+                    alert("not email");
+                }
+            }
 
 }
 
@@ -96,3 +110,27 @@ for(let j=0; j< 5; j++){
 
 console.log("You entered:", emails);
 console.log("You entered:", passwords);
+
+
+alert("Now check the Email & Password");
+
+let checkEmail = prompt("Enter email");
+let checkPass = prompt("Enter password");
+
+var isFoundd = false;
+for(var k=0; k<emails.length; k++){
+    if(checkEmail ===emails[k] && checkPass === passwords[k]){
+       isFoundd = true;
+    }
+    
+    
+}
+
+if(isFoundd == true)
+{
+    alert("Email and Password is matched");
+
+}
+else{
+    alert("email and password is not marched");
+}
