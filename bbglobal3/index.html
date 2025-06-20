@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Client Campaign Dashboard</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      #chart_div, #pie_chart {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="heading">Campaign Analytics</h2>
+    <div id="chart_div" style="width:100%; height:500px;"></div>
+    <div id="pie_chart" style="width:100%; height:400px;"></div>
+
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(init);
+
+      const SHEET_ID = '1Au9YS5klI7QiQ_kmWeCOEmQt_W5bejPRAC8oEISwGEk';
+      const GID = '1788016887'; // Tab: MultiMetricData
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedClient = urlParams.get('client');
+
+      let fullData;
+      let campaignMap = {};
+
+      function init() {
+        if (!selectedClient) {
+          document.getElementById('chart_div').innerHTML = `<p style="color:red;">❌ Error: Please provide a client in the URL (e.g., ?client=NCL)</p>`;
+          return;
+        }
+
+        const query = new google.visualization.Query(
+          `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}&headers=1`
+        );
+
+        query.send((res) => {
+          if (res.isError()) {
+            console.error('Error fetching sheet:', res.getMessage(), res.getDetailedMessage());
+            document.getElementById('chart_div').innerHTML = `<p style="color:red;">❌ Failed to load data from Google Sheets.</p>`;
+            return;
+          }
+
+          fullData = res.getDataTable();
+          document.getElementById('heading').innerText = `Opportunities by Campaign (${selectedClient})`;
+          drawLeadsChart(selectedClient);
+        });
+      }
+
+      function drawLeadsChart(clientName) {
+  const sentData = new google.visualization.DataTable();
+  sentData.addColumn('string', 'Campaign');
+  sentData.addColumn('number', 'Sent');
+
+  campaignMap = {};
+
+  for (let i = 0; i < fullData.getNumberOfRows(); i++) {
+    const campaignName = fullData.getValue(i, 0);
+    const sent         = parseFloat(fullData.getValue(i, 1)) || 0;
+    const replies      = parseFloat(fullData.getValue(i, 3)) || 0;
+    const bounced      = parseFloat(fullData.getValue(i, 4)) || 0;
+    const opportunities= parseFloat(fullData.getValue(i, 7)) || 0; 
+    const clientPrefix = campaignName.split(' - ')[0].trim();
+
+    if (clientPrefix.toLowerCase() === clientName.toLowerCase()) {
+      sentData.addRow([campaignName, sent]);
+      campaignMap[campaignName] = { sent, replies, bounced, opportunities };
+    }
+  }
+
+  if (sentData.getNumberOfRows() === 0) {
+    document.getElementById('chart_div').innerHTML = `<p style="color:red;">⚠️ No data found for client: ${clientName}</p>`;
+    return;
+  }
+
+  const options = {
+  title: `Sent Emails by Campaign (${clientName})`,
+  hAxis: {
+    title: 'Campaign',
+    slantedText: true,
+    slantedTextAngle: 60,
+    textStyle: {
+      fontSize: 12,
+      maxAlternation: 1,
+    }
+  },
+  chartArea: {
+    bottom: 120, // Adds more room for longer campaign names
+  },
+  vAxis: { title: 'Sent Count' },
+  legend: { position: 'none' },
+  tooltip: { isHtml: true }
+};
+
+
+  const chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+  chart.draw(sentData, options);
+
+  google.visualization.events.addListener(chart, 'select', function () {
+    const selection = chart.getSelection();
+    if (selection.length > 0) {
+      const selectedRow = selection[0].row;
+      const campaignName = sentData.getValue(selectedRow, 0);
+      showPieChart(campaignName);
+    }
+  });
+}
+
+
+     function showPieChart(campaignName) {
+  const campaign = campaignMap[campaignName];
+  if (!campaign || !campaign.sent || campaign.sent === 0) return;
+
+  const sent = campaign.sent;
+  const replies = campaign.replies;
+  const bounced = campaign.bounced;
+  const opportunities = campaign.opportunities;
+
+  const pieData = new google.visualization.DataTable();
+  pieData.addColumn('string', 'Metric');
+  pieData.addColumn('number', 'Count');
+
+  pieData.addRows([
+    ['Sent', sent],
+    ['Replies', replies],
+    ['Bounced', bounced],
+    ['Opportunities', opportunities]
+  ]);
+
+  const options = {
+    title: `Campaign Breakdown – ${campaignName}`,
+    is3D: true,
+  };
+
+  const pieChart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+  pieChart.draw(pieData, options);
+}
+
+
+
+
+
+    </script>
+  </body>
+</html>
