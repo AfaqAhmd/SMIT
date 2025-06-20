@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Campaign Metrics Chart</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      select {
+        padding: 8px;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Campaign Analytics</h2>
+    <label for="clientSelect">Select Client:</label>
+    <select id="clientSelect">
+      <option value="">-- Select Client --</option>
+    </select>
+    <div id="chart_div" style="width:100%; height:600px;"></div>
+
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(init);
+
+      const SHEET_ID = '1GOVLqHc1vcQWL9w5vq1dyZ3-N-t20j59i1CrogINJvo';
+      const GID = '1788016887'; // GID for 'MultiMetricData' tab
+
+      let fullData;
+
+      function init() {
+        const query = new google.visualization.Query(
+          `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}&headers=1`
+        );
+
+        query.send((res) => {
+          if (res.isError()) {
+            console.error(
+              'Error fetching sheet:',
+              res.getMessage(),
+              res.getDetailedMessage()
+            );
+            return;
+          }
+
+          fullData = res.getDataTable();
+          populateDropdown(fullData);
+        });
+      }
+
+      function populateDropdown(data) {
+        const clients = new Set();
+
+        for (let i = 0; i < data.getNumberOfRows(); i++) {
+          const campaignName = data.getValue(i, 0);
+          const clientPrefix = campaignName.split(' - ')[0].trim();
+          clients.add(clientPrefix);
+        }
+
+        const dropdown = document.getElementById('clientSelect');
+        Array.from(clients)
+          .sort()
+          .forEach((client) => {
+            const opt = document.createElement('option');
+            opt.value = client;
+            opt.textContent = client;
+            dropdown.appendChild(opt);
+          });
+
+        dropdown.addEventListener('change', () =>
+          drawFilteredChart(dropdown.value)
+        );
+      }
+
+      function drawFilteredChart(selectedClient) {
+        if (!selectedClient) {
+          document.getElementById('chart_div').innerHTML = '';
+          return;
+        }
+
+        const filtered = new google.visualization.DataTable();
+        filtered.addColumn('string', 'Campaign Name');
+        filtered.addColumn('number', 'Sent');
+        filtered.addColumn('number', 'Replies');
+        filtered.addColumn('number', 'Bounced');
+
+        for (let i = 0; i < fullData.getNumberOfRows(); i++) {
+          const campaignName = fullData.getValue(i, 0);
+          const sent = parseFloat(fullData.getValue(i, 1)) || 0;
+          const replies = parseFloat(fullData.getValue(i, 3)) || 0;
+          const bounced = parseFloat(fullData.getValue(i, 4)) || 0;
+          const clientPrefix = campaignName.split(' - ')[0].trim();
+
+          if (clientPrefix === selectedClient) {
+            filtered.addRow([campaignName, sent, replies, bounced]);
+          }
+        }
+
+        const options = {
+          title: `${selectedClient} - Sent, Replies, Bounced`,
+          hAxis: {
+            title: 'Campaign Name',
+            slantedText: true,
+            slantedTextAngle: 45,
+          },
+          vAxis: { title: 'Count' },
+          chartArea: { width: '80%', height: '70%' },
+          legend: { position: 'top' },
+          bars: 'vertical', // Important for column chart
+        };
+
+        const chart = new google.visualization.ColumnChart(
+          document.getElementById('chart_div')
+        );
+        chart.draw(filtered, options);
+
+      }
+    </script>
+  </body>
+</html>
