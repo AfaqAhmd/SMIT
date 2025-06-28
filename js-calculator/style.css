@@ -41,10 +41,11 @@ input{
     margin: 40px auto;
     padding: 10px;
 }
+
 input::placeholder{
     color: #f8f4f3;
-
 }
+
 button{
     border: none;
     /* padding: 5px; */
