@@ -1,0 +1,189 @@
+/* *{
+    padding: 0;
+    margin: 0;
+} */
+*{
+     font-family: "Barlow", sans-serif;
+}
+.main{
+    width: 100%;
+    background-color: #191919;
+}
+.header{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #212121;
+    padding: 20px 162px;
+}
+.header .logo{
+    width: 20%;
+}
+
+.header .navItems{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+}
+
+.header .navItems ul{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    gap: 30px;
+    list-style: none;
+}
+
+.header .navItems ul li:hover{
+    background-color: #262626;
+    padding: 14px 28px;
+}
+.header .navItems button{
+    background-color: #9eff00;
+    padding: 16px 24px;
+    border-radius: 8px;
+    border-width: 0;
+    font-weight: 500;
+}
+
+
+/* hero section */
+.heroSection{
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #000000;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+    border: 1px solid #212121;
+}
+.heroImage{
+    background-image: url(./assets/herosection-bg.png);
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    align-items: center;
+}
+.heroHeading {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
+
+.heroHeading h1{
+    color: white;
+    font-size: 68px;
+    font-family: "Barlow", sans-serif;
+    /* text-align: center; */
+}
+
+.heroItems{
+    /* padding: 24px 40px; */
+    background-color: #1c1c1c;
+    border: 1px solid #262626;
+    text-align: center;
+}
+
+.heroItems p{
+    color: #808082;
+    font-size: 22px;
+}
+
+.heroItems p span{
+    color: white;
+    padding: 12px 14px;
+    background-color: #262626;
+    border-radius: 8px;
+}
+
+.twoBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.twoBtns button{
+    padding: 18px 28px;
+    border-radius: 10px;
+}
+.btn1{
+    background-color: #1e1f1b;
+    border: #262626;
+    color: #808082;
+}
+.btn2{
+    background-color: #9eff00;
+    border: 0;
+}
+
+
+
+
+/* ---------- */
+.trustedCom{
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #262626;
+}
+
+.companies{
+    padding: 20px 34px;
+     background-color: #191919;
+  border: 1px solid #262626;
+  border-radius: 100px;
+  color: #98989a;
+  margin-top: -30px;
+}
+.comList{
+    display: flex;
+}
+
+.comList img{
+    width: 200px;
+}
+
+
+/* ---------services---------- */
+
+.services{
+    width: 90%;
+    height: 30vh;
+    margin: 0 auto;
+    text-align: center;
+    color: #ffff;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.services h2{
+    font-size: 48px;
+    line-height: 0;
+    
+
+}
+
+.servicesCards{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    color: #98989a;
+
+}
+.sCards i{
+    color: #9eff00;
+}
+.sCards span{
+    padding: 15px;
+    background-color: #262626;
+}
