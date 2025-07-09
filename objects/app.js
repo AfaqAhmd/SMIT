@@ -11,7 +11,7 @@ const person = {
 
 
 
-console.log(person.name);       // Afaq
+console.log(person.name);       // ahmed
 console.log(person['age']);     // 25
 person.greet();                 // Hello!
 2
