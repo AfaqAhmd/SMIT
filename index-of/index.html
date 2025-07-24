@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IndexOf</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndexOf Replace</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 60px;
+      font-family: Arial, sans-serif;
+    }
 
-    <style>
-        body{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 60px;
-        }
-    </style>
+    .main {
+      margin-bottom: 20px;
+    }
+
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+
+    p {
+      max-width: 600px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-            <div class="main">
+  <div class="main">
+    <input type="text" placeholder="Find text" id="text-1">
+    <input type="text" placeholder="Replace with" id="text-2">
+    <button onclick="runIndexof()">Replace</button>
+  </div>
 
-                
-                <input type="text" placeholder="find text" id="text-1">
-                <input type="text" placeholder="Replace with" id="text-2">
-                <button onclick="runIndexof()">Replace</button>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-            </div>
+  <!-- Paragraph to display -->
+  <p id="paragraph">
+    A computer is an electronic device that manipulates data and information, capable of storing, retrieving and processing it.
+  </p>
 
-    <script src="app.js"></script>    
+  <script src="app.js"></script>
 </body>
 </html>
