@@ -45,11 +45,24 @@ const login = () => {
   for (var i = 0; i < getData.length; i++ ){
     // console.log(getData[i]);
     if(getData[i].email === loginEmail && getData[i].password === loginPassword ){
-    //   console.log('hello irtiza!!!!');  
-        window.location.href = "home.html";
+
+      window.localStorage.setItem('loginUser', JSON.stringify({validUser: getData[i]}))
+
+        window.location.href = "blog.html";
     }
     else{
         alert("your emails or password is incorrect")
     }
   }
+}
+
+
+
+function getUser() {
+  let user = window.localStorage.getItem("loginUser");
+  user = JSON.parse(user);
+  let currenUser = document.getElementById('name');
+
+  currenUser.innerHTML = user.validUser.firstName.toUpperCase();;
+  
 }
